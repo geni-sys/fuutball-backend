@@ -7,7 +7,7 @@ const routes = Router();
 /**
  * all routes to create new data
  */
-routes.use("/new", gameRoutes);
+routes.use("/", gameRoutes);
 
 /**
  * all routes to update info

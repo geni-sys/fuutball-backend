@@ -1,11 +1,14 @@
 import { Router } from "express";
 
 import { CreateGameController } from "@modules/Game/useCases/CreateGame/CreateGameController";
+import { GetPrincipalGameController } from "@modules/Game/useCases/GetPrincipalGame/GetPrincipalGameController";
 
 const gameRoutes = Router();
 
 const createGameController = new CreateGameController();
+const getPrincipalGameController = new GetPrincipalGameController();
 
-gameRoutes.post("/fuutball", createGameController.handle);
+gameRoutes.post("/new/fuutball", createGameController.handle);
+gameRoutes.get("/principal/fuutball", getPrincipalGameController.handle);
 
 export { gameRoutes };

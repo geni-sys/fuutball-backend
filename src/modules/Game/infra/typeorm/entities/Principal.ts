@@ -1,22 +1,17 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity("games")
-class Games {
+@Entity("principal")
+class Principal {
   @PrimaryColumn()
-  id?: string;
+  id: string;
 
   @Column()
-  times: string;
+  game: string;
 
+  // data como Principal
   @Column()
-  winner: string;
-
-  @Column()
-  metadata: string;
-
-  @Column()
-  twitters: string;
+  onWhatDate: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -27,5 +22,4 @@ class Games {
     }
   }
 }
-
-export { Games };
+export { Principal };

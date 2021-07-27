@@ -3,13 +3,16 @@ import { getRepository, Repository } from "typeorm";
 import { ICreateGameDTO } from "@modules/Game/DTO/ICreateGameDTO";
 import { IGamesRepository } from "@modules/Game/Repositories/IGamesRepository";
 
-import { Games } from "../entities/Games";
+import { Game } from "../entities/Game";
+import { Principal } from "../entities/Principal";
 
 class GamesRepository implements IGamesRepository {
-  private repository: Repository<Games>;
+  private repository: Repository<Game>;
+  private PrincipalRepository: Repository<Principal>;
 
   constructor() {
-    this.repository = getRepository(Games);
+    this.repository = getRepository(Game);
+    this.PrincipalRepository = getRepository(Principal);
   }
 
   async create({
@@ -32,6 +35,20 @@ class GamesRepository implements IGamesRepository {
     });
 
     await this.repository.save(game);
+  }
+
+  async list(): Promise<Game[]> {
+    return this.repository.find();
+  }
+
+  async getPrincipal(onWhatDate: string): Promise<Game> {
+    const principal = await this.PrincipalRepository.findOne({
+      where: {
+        onWhatDate,
+      },
+    });
+
+    return this.repository.findOne(principal.game);
   }
 }
 
