@@ -50,6 +50,15 @@ class GamesRepository implements IGamesRepository {
 
     return this.repository.findOne(principal.game);
   }
+
+  async setPrincipal(game: string, onWhatDate: string): Promise<void> {
+    const principal = this.PrincipalRepository.create({
+      game,
+      onWhatDate,
+    });
+
+    await this.PrincipalRepository.save(principal);
+  }
 }
 
 export { GamesRepository };
