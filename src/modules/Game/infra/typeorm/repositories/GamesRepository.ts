@@ -38,7 +38,15 @@ class GamesRepository implements IGamesRepository {
   }
 
   async list(): Promise<Game[]> {
-    return this.repository.find();
+    return (await this.repository.find()).map((game) => {
+      Object.assign(game, {
+        times: JSON.parse(game.times),
+        metadata: JSON.parse(game.metadata),
+        twitters: JSON.parse(game.twitters),
+      });
+
+      return game;
+    });
   }
 
   async getPrincipal(onWhatDate: string): Promise<Game> {
