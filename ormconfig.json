@@ -4,7 +4,7 @@
   "host": "localhost",
   "username": "docker",
   "password": "fuutball",
-  "database": "database_fuutball",
+  "database": "fuutball",
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
   "entities": ["./src/modules/**/entities/*.ts"],
   "cli": {

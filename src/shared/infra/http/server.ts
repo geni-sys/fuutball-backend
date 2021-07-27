@@ -1,7 +1,5 @@
-import express from "express";
+import { app } from "./app";
 
-const app = express();
-
-app.listen(3333, () => console.log("SERVER RUNNING IN http://localhost:333"));
-
-export { app };
+app.listen(process.env.PORT || 3333, () =>
+  console.log("SERVER RUNNING IN http://localhost:3333")
+);
