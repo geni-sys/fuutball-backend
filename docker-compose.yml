@@ -1,0 +1,17 @@
+services:
+  database_fuutball:
+    image: postgres
+    container_name: database_fuutball
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=fuutball
+      - POSTGRES_DB=fuutball
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
