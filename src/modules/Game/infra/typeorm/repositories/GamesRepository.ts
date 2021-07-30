@@ -56,7 +56,14 @@ class GamesRepository implements IGamesRepository {
       },
     });
 
-    return this.repository.findOne(principal.game);
+    const game = await this.repository.findOne(principal.game);
+    Object.assign(game, {
+      times: JSON.parse(game.times),
+      metadata: JSON.parse(game.metadata),
+      twitters: JSON.parse(game.twitters),
+    });
+
+    return game;
   }
 
   async setPrincipal(game: string, onWhatDate: string): Promise<void> {
