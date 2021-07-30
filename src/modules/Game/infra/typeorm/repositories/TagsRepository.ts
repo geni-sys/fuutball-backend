@@ -21,5 +21,15 @@ class TagsRepository implements ITagsRepository {
 
     await this.repository.save(tag);
   }
+
+  async list(): Promise<Tag[]> {
+    return (await this.repository.find()).map((tag) => {
+      Object.assign(tag, {
+        metadata: JSON.parse(tag.metadata),
+      });
+
+      return tag;
+    });
+  }
 }
 export { TagsRepository };
