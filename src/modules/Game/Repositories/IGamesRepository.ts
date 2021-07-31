@@ -6,6 +6,7 @@ interface IGamesRepository {
   list(): Promise<Game[]>;
   getPrincipal(onWhatDate: string): Promise<Game>;
   setPrincipal(game: string, onWhatDate: string): Promise<void>;
+  findById(id: string): Promise<Game>;
 }
 
 export { IGamesRepository };

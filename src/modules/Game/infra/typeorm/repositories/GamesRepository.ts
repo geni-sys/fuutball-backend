@@ -16,18 +16,20 @@ class GamesRepository implements IGamesRepository {
   }
 
   async create({
+    id,
     winner,
     twitters,
     times,
     metadata,
   }: ICreateGameDTO): Promise<void> {
     const serializedGames = {
-      times: JSON.stringify(times, null, 2),
+      times: id ? (times as any) : JSON.stringify(times, null, 2),
       twitters: JSON.stringify(twitters, null, 2),
-      metadata: JSON.stringify(metadata, null, 2),
+      metadata: id ? (metadata as any) : JSON.stringify(metadata, null, 2),
     };
 
     const game = this.repository.create({
+      id,
       times: serializedGames.times,
       winner,
       metadata: serializedGames.metadata,
@@ -47,6 +49,10 @@ class GamesRepository implements IGamesRepository {
 
       return game;
     });
+  }
+
+  async findById(id: string): Promise<Game> {
+    return this.repository.findOne(id);
   }
 
   async getPrincipal(onWhatDate: string): Promise<Game> {
