@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import "express-async-errors";
-
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 
@@ -18,6 +18,7 @@ const app = express();
 /**
  * App middleware
  */
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 app.use(
