@@ -37,6 +37,11 @@ class GamesRepository implements IGamesRepository {
     });
 
     await this.repository.save(game);
+    Object.assign(game, {
+      times: JSON.parse(game.times),
+      metadata: JSON.parse(game.metadata),
+      twitters: JSON.parse(game.twitters),
+    });
     return game;
   }
 
