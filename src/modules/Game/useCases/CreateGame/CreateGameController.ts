@@ -9,14 +9,14 @@ class CreateGameController {
 
     const { metadata, times, twitters, winner } = request.body;
 
-    await createGameUseCase.execute({
+    const newGame = await createGameUseCase.execute({
       metadata,
       times,
       twitters,
       winner,
     });
 
-    return response.status(201).json();
+    return response.status(201).json(newGame);
   }
 }
 

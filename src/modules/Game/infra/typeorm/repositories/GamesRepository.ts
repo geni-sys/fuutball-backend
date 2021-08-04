@@ -21,7 +21,7 @@ class GamesRepository implements IGamesRepository {
     twitters,
     times,
     metadata,
-  }: ICreateGameDTO): Promise<void> {
+  }: ICreateGameDTO): Promise<Game> {
     const serializedGames = {
       times: id ? (times as any) : JSON.stringify(times, null, 2),
       twitters: JSON.stringify(twitters, null, 2),
@@ -37,6 +37,7 @@ class GamesRepository implements IGamesRepository {
     });
 
     await this.repository.save(game);
+    return game;
   }
 
   async list(): Promise<Game[]> {
